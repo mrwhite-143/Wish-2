@@ -1,101 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eid Mubarak My Love ✨</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Eid Mubarak</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
 </head>
+
 <body>
-    <div class="custom-cursor"></div>
 
-    <!-- Auto Play Screen -->
-    <div id="welcome-view" class="container">
-        <div class="gif-container">
-            <img src="https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-2202kb-53von6w05v0ekxmt.webp" alt="Welcome">
-        </div>
-        <h1 id="main-title" class="title">Eid Mubarak!</h1>
-        <p id="sub-title" class="subtitle">I have a special surprise for you...</p>
-        <button class="main-btn" onclick="startShow()">Open My Heart 💖</button>
-    </div>
+<div class="stars"></div>
 
-    <!-- Wishes Container -->
-    <div id="wish-display" class="container" style="display:none;">
-        <div id="card-holder"></div>
-        <button id="next-btn" class="main-btn">Tap for More Magic ✨</button>
-    </div>
+<div id="welcome-view" class="container">
 
-    <footer class="credits">
-        <p>Developer: <span>Flame Vortex (SIAM)</span></p>
-    </footer>
+<img class="hero-gif" src="https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-2202kb-53von6w05v0ekxmt.webp">
 
-    <script>
-        // Extract Data from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const name = urlParams.get('name') || "Sweetheart";
-        const gender = urlParams.get('g') || "girl";
-        const title = (gender === "girl") ? "Princess" : "King";
+<h1 id="main-title" class="title"></h1>
 
-        document.getElementById('main-title').innerText = `Eid Mubarak, My ${title} ${name}! 🌙`;
+<p class="subtitle">I prepared something special for you</p>
 
-        const wishes = [
-            { text: `May this Eid bring you endless joy, my ${title}. 💖`, gif: "https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-494kb-aax9dv39khdby1xh.webp" },
-            { text: "Your presence is the best Eidi I could ever have. ✨", gif: "https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-2169kb-sz5qb2llabzg46qu.webp" },
-            { text: "Wishing you a day as beautiful as you are. 🌹", gif: "https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-2671kb-uudx29i0jja0yyim.webp" },
-            { text: "Sending you lots of virtual hugs and kisses! 💕", gif: "https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-5725kb-2p6g03lbblpoe1z7.webp" },
-            { text: "Let's be together forever. Happy Eid! 🌙", gif: "https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-1136kb-tb9vrnxamrsn3cva.webp" }
-        ];
+<button class="main-btn" onclick="startShow()">
 
-        let currentStep = 0;
+Open My Heart 💖
 
-        function startShow() {
-            gsap.to("#welcome-view", { opacity: 0, scale: 0.8, duration: 0.5, onComplete: () => {
-                document.getElementById('welcome-view').style.display = 'none';
-                document.getElementById('wish-display').style.display = 'block';
-                showNextWish();
-            }});
-        }
+</button>
 
-        function showNextWish() {
-            if (currentStep < wishes.length) {
-                const holder = document.getElementById('card-holder');
-                const wish = wishes[currentStep];
-                
-                holder.innerHTML = `
-                    <div class="wish-card">
-                        <img src="${wish.gif}" alt="Cat GIF">
-                        <p>${wish.text}</p>
-                    </div>
-                `;
-                gsap.from(".wish-card", { opacity: 0, y: 30, duration: 0.6 });
-                currentStep++;
-                
-                if(currentStep === wishes.length) {
-                    document.getElementById('next-btn').innerText = "I Love You! ❤️";
-                    createHearts();
-                }
-            }
-        }
+</div>
 
-        document.getElementById('next-btn').addEventListener('click', showNextWish);
+<div id="wish-display" class="container">
 
-        function createHearts() {
-            setInterval(() => {
-                const heart = document.createElement("div");
-                heart.className = "floating";
-                heart.innerHTML = "💖";
-                heart.style.left = Math.random() * 100 + "vw";
-                heart.style.top = "100vh";
-                document.body.appendChild(heart);
-                gsap.to(heart, { y: "-110vh", x: (Math.random()-0.5)*100, duration: 3, onComplete: () => heart.remove() });
-            }, 300);
-        }
+<div id="card-holder"></div>
 
-        const cursor = document.querySelector('.custom-cursor');
-        document.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
-        });
-    </script>
+<button id="next-btn" class="main-btn">
+
+Next Surprise ✨
+
+</button>
+
+</div>
+
+<footer class="credits">
+
+Developer: Flame Vortex (SIAM)
+
+</footer>
+
+<script>
+
+const url=new URLSearchParams(window.location.search)
+
+const name=url.get("name")||"Sweetheart"
+
+const gender=url.get("g")||"girl"
+
+const title=gender==="girl"?"Princess":"King"
+
+document.getElementById("main-title").innerText=`Eid Mubarak ${title} ${name} 🌙`
+
+const wishes=[
+
+{
+text:`May this Eid bring endless happiness for you my ${title}.`,
+gif:"https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-494kb-aax9dv39khdby1xh.webp"
+},
+
+{
+text:"You are the most beautiful Eidi in my life.",
+gif:"https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-2169kb-sz5qb2llabzg46qu.webp"
+},
+
+{
+text:"I wish your smile stays forever.",
+gif:"https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-2671kb-uudx29i0jja0yyim.webp"
+},
+
+{
+text:"Sending you hugs and kisses.",
+gif:"https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-5725kb-2p6g03lbblpoe1z7.webp"
+},
+
+{
+text:"Stay with me forever ❤️",
+gif:"https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-1136kb-tb9vrnxamrsn3cva.webp"
+}
+
+]
+
+let step=0
+
+function startShow(){
+
+gsap.to("#welcome-view",{scale:.8,opacity:0,duration:.5,onComplete:()=>{
+
+document.getElementById("welcome-view").style.display="none"
+
+document.getElementById("wish-display").style.display="block"
+
+showNext()
+
+}})
+
+}
+
+function showNext(){
+
+if(step<wishes.length){
+
+const data=wishes[step]
+
+document.getElementById("card-holder").innerHTML=`
+
+<div class="wish-card">
+
+<img src="${data.gif}">
+
+<p>${data.text}</p>
+
+</div>
+
+`
+
+gsap.from(".wish-card",{scale:.7,opacity:0,duration:.6})
+
+step++
+
+}
+
+}
+
+document.getElementById("next-btn").onclick=showNext
+
+</script>
+
 </body>
 </html>
