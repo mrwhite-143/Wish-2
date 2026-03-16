@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Mubarak My Love ✨</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="custom-cursor"></div>
+
+    <!-- Auto Play Screen -->
+    <div id="welcome-view" class="container">
+        <div class="gif-container">
+            <img src="https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-2202kb-53von6w05v0ekxmt.webp" alt="Welcome">
+        </div>
+        <h1 id="main-title" class="title">Eid Mubarak!</h1>
+        <p id="sub-title" class="subtitle">I have a special surprise for you...</p>
+        <button class="main-btn" onclick="startShow()">Open My Heart 💖</button>
+    </div>
+
+    <!-- Wishes Container -->
+    <div id="wish-display" class="container" style="display:none;">
+        <div id="card-holder"></div>
+        <button id="next-btn" class="main-btn">Tap for More Magic ✨</button>
+    </div>
+
+    <footer class="credits">
+        <p>Developer: <span>Flame Vortex (SIAM)</span></p>
+    </footer>
+
+    <script>
+        // Extract Data from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name') || "Sweetheart";
+        const gender = urlParams.get('g') || "girl";
+        const title = (gender === "girl") ? "Princess" : "King";
+
+        document.getElementById('main-title').innerText = `Eid Mubarak, My ${title} ${name}! 🌙`;
+
+        const wishes = [
+            { text: `May this Eid bring you endless joy, my ${title}. 💖`, gif: "https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-494kb-aax9dv39khdby1xh.webp" },
+            { text: "Your presence is the best Eidi I could ever have. ✨", gif: "https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-2169kb-sz5qb2llabzg46qu.webp" },
+            { text: "Wishing you a day as beautiful as you are. 🌹", gif: "https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-2671kb-uudx29i0jja0yyim.webp" },
+            { text: "Sending you lots of virtual hugs and kisses! 💕", gif: "https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-5725kb-2p6g03lbblpoe1z7.webp" },
+            { text: "Let's be together forever. Happy Eid! 🌙", gif: "https://gifdb.com/images/high/mochi-mochi-peach-cat-gif-file-1136kb-tb9vrnxamrsn3cva.webp" }
+        ];
+
+        let currentStep = 0;
+
+        function startShow() {
+            gsap.to("#welcome-view", { opacity: 0, scale: 0.8, duration: 0.5, onComplete: () => {
+                document.getElementById('welcome-view').style.display = 'none';
+                document.getElementById('wish-display').style.display = 'block';
+                showNextWish();
+            }});
+        }
+
+        function showNextWish() {
+            if (currentStep < wishes.length) {
+                const holder = document.getElementById('card-holder');
+                const wish = wishes[currentStep];
+                
+                holder.innerHTML = `
+                    <div class="wish-card">
+                        <img src="${wish.gif}" alt="Cat GIF">
+                        <p>${wish.text}</p>
+                    </div>
+                `;
+                gsap.from(".wish-card", { opacity: 0, y: 30, duration: 0.6 });
+                currentStep++;
+                
+                if(currentStep === wishes.length) {
+                    document.getElementById('next-btn').innerText = "I Love You! ❤️";
+                    createHearts();
+                }
+            }
+        }
+
+        document.getElementById('next-btn').addEventListener('click', showNextWish);
+
+        function createHearts() {
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.className = "floating";
+                heart.innerHTML = "💖";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.top = "100vh";
+                document.body.appendChild(heart);
+                gsap.to(heart, { y: "-110vh", x: (Math.random()-0.5)*100, duration: 3, onComplete: () => heart.remove() });
+            }, 300);
+        }
+
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+        });
+    </script>
+</body>
+</html>
